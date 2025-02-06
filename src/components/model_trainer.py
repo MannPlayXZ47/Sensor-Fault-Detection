@@ -10,7 +10,7 @@ from xgboost import XGBClassifier
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.model_selection import GridSearchCV, train_test_split
-from src.constants import *
+from src.constant import *
 from src.exception import CustomException
 from src.logger import logging
 from src.utils.main_utils import MainUtils

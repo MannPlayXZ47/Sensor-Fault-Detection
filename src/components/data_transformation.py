@@ -7,7 +7,7 @@ from sklearn.preprocessing import FunctionTransformer, RobustScaler, StandardSca
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 
-from src.constants import *
+from src.constant import *
 from src.utils.main_utils import MainUtils
 from src.exception import CustomException
 from src.logger import logging
@@ -30,7 +30,7 @@ class DataTransformation:
     def get_data(feature_store_file_path:str)->pd.DataFrame:
         try:
             data = pd.read_csv(feature_store_file_path)
-            data.rename(columns={"Good/Bad"}: TARGET_COLUMN, inplace=True)
+            data.rename(columns={"Good/Bad": TARGET_COLUMN}, inplace=True)
             return data
         except Exception as e:
             raise CustomException(e,sys)

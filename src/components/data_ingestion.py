@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from pymongo import MongoClient
 from zipfile import Path
-from src.constants import *
+from src.constant import *
 from src.utils.main_utils import MainUtils
 from src.exception import CustomException
 from src.logger import logging
@@ -21,25 +21,25 @@ class DataIngestion:
 
     def export_collection_as_dataframe(self,collection_name,db_name):
         try:
-            client = MongoClient(MONGO_DB_URL)
+            mongo_client = MongoClient(MONGO_DB_URL)
             collection = mongo_client[db_name][collection_name]
-            df = pd.DataFrame(list(collection.find))
+            df = pd.DataFrame(list(collection.find()))
 
-            if "_id" in df.collumns.to_list():
+            if "_id" in df.columns.to_list():
                 df.drop(columns=["_id"],inplace=True, axis=1)
                 df.replace({"na:":np.nan},inplace=True)
                 return df
         except Exception as e:
             raise CustomException(e,sys)
     
-    def export_data_into_feature_store_file_path(self) -> pd.Dataframe:
+    def export_data_into_feature_store_file_path(self) -> pd.DataFrame:
         try:
             logging.info(f"Exporting Data From MongoDB")
             raw_file_path=self.data_ingestion_config.artifact_folder
             os.makedirs(raw_file_path,exist_ok=True)
 
             sensor_data = self.export_collection_as_dataframe(
-                collection_name=MONGO_COLLECTION_NAME
+                collection_name=MONGO_COLLECTION_NAME,
                 db_name= MONGO_DATABASE_NAME
             )
 

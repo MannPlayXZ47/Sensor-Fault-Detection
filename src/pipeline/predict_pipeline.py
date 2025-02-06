@@ -6,7 +6,7 @@ import pickle
 from src.logger import logging
 from src.exception import CustomException
 from flask import request
-from src.constants import *
+from src.constant import *
 from src.utils.main_utils import MainUtils
 from dataclasses import dataclass
 
